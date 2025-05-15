@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/bookings")
 @RequiredArgsConstructor
 public class BookingController {
+
   private final BookingService bookingService;
   private final RoomService roomService;
 
@@ -41,7 +42,8 @@ public class BookingController {
   }
 
   @GetMapping("/by-guest")
-  public ResponseEntity<List<BookingResponseDTO>> getBookingsByGuest(@RequestParam String guestName) {
+  public ResponseEntity<List<BookingResponseDTO>> getBookingsByGuest(
+      @RequestParam String guestName) {
     List<Booking> bookings = bookingService.getBookingsByGuestName(guestName);
     List<BookingResponseDTO> responseDTOs = bookings.stream()
         .map(this::convertToDTO)
@@ -50,7 +52,8 @@ public class BookingController {
   }
 
   @GetMapping("/my-bookings")
-  public ResponseEntity<List<BookingResponseDTO>> getMyBookings(@AuthenticationPrincipal UserDetails userDetails) {
+  public ResponseEntity<List<BookingResponseDTO>> getMyBookings(
+      @AuthenticationPrincipal UserDetails userDetails) {
     User user = (User) userDetails;
     List<Booking> bookings = bookingService.getBookingsByUserId(user.getId());
     List<BookingResponseDTO> responseDTOs = bookings.stream()

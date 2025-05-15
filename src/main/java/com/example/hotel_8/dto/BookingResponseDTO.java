@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 @Data
 public class BookingResponseDTO {
+
   private Long id;
   private String hotelName;
   private String roomNumber;
