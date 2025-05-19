@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+  <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+  <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    <destination>localhost:5044</destination>
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+      <customFields>{"appname":"hotel-booking"}</customFields>
+      <includeMdcKeyName>userId</includeMdcKeyName>
+      <includeMdcKeyName>requestId</includeMdcKeyName>
+    </encoder>
+    <reconnectionDelay>1000</reconnectionDelay>
+    <writeTimeout>5s</writeTimeout>
+    <keepAliveDuration>5 minutes</keepAliveDuration>
+  </appender>
+
+  <root level="INFO">
+    <appender-ref ref="CONSOLE"/>
+    <appender-ref ref="LOGSTASH"/>
+  </root>
+
+  <logger name="com.example.hotel_8" level="DEBUG"/>
+</configuration>
