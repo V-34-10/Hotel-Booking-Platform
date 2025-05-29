@@ -1,4 +1,6 @@
 DELETE
+FROM rooms;
+DELETE
 FROM hotels;
 
 -- Додавання готелів
