@@ -2,7 +2,7 @@ DELETE
 FROM hotels;
 
 -- Додавання готелів
-INSERT INTO hotels (name, address, rating)
+INSERT INTO hotels (name, location, rating)
 VALUES ('Grand Hotel', 'вул. Шевченка 10, Київ', 4.5),
        ('City Hotel', 'вул. Хрещатик 22, Київ', 4.2),
        ('Seaside Resort', 'вул. Морська 5, Одеса', 4.8),
