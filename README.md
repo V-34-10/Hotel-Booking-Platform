@@ -2,7 +2,10 @@
 
 A Spring Boot application for hotel booking management with JWT authentication and ELK stack integration.
 
-## Features
+## Deployment on Render
+- https://hotel-booking-platform-rzco.onrender.com
+
+## Features 
 
 - Hotel and room management
 - Room booking system
