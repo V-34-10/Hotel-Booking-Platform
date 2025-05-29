@@ -1,5 +1,6 @@
 package com.example.hotel_8.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -23,7 +24,7 @@ public class Hotel {
   @Column(nullable = false)
   private Double rating;
 
-  @JsonManagedReference
+  @JsonIgnore
   @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
   private List<Room> rooms;
 }

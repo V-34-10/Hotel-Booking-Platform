@@ -1,5 +1,6 @@
 package com.example.hotel_8.controller;
 
+import com.example.hotel_8.dto.HotelCreateRequest;
 import com.example.hotel_8.entity.Hotel;
 import com.example.hotel_8.service.HotelService;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,11 @@ public class HotelController {
   }
 
   @PostMapping
-  public ResponseEntity<Hotel> createHotel(@RequestBody Hotel hotel) {
+  public ResponseEntity<Hotel> createHotel(@RequestBody HotelCreateRequest request) {
+    Hotel hotel = new Hotel();
+    hotel.setName(request.getName());
+    hotel.setLocation(request.getLocation());
+    hotel.setRating(request.getRating());
     return ResponseEntity.ok(hotelService.createHotel(hotel));
   }
 }
