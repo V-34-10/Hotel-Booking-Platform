@@ -1,5 +1,6 @@
 package com.example.hotel_8.controller;
 
+import com.example.hotel_8.dto.BookingRequestDTO;
 import com.example.hotel_8.dto.BookingResponseDTO;
 import com.example.hotel_8.dto.CreateBookingRequest;
 import com.example.hotel_8.entity.Booking;
@@ -25,8 +26,8 @@ public class BookingController {
   private final RoomService roomService;
 
   @PostMapping
-  public ResponseEntity<Booking> createBooking(
-      @RequestBody CreateBookingRequest request,
+  public ResponseEntity<BookingResponseDTO> createBooking(
+      @RequestBody BookingRequestDTO request,
       @AuthenticationPrincipal UserDetails userDetails) {
     Room room = roomService.getRoomById(request.getRoomId());
     User user = (User) userDetails;
@@ -38,7 +39,8 @@ public class BookingController {
     booking.setToDate(request.getToDate());
     booking.setUser(user);
 
-    return ResponseEntity.ok(bookingService.createBooking(booking));
+    Booking savedBooking = bookingService.createBooking(booking);
+    return ResponseEntity.ok(convertToDTO(savedBooking));
   }
 
   @GetMapping("/by-guest")
