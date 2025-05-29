@@ -1,16 +1,22 @@
 DO $$
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM hotels LIMIT 1) THEN
-            INSERT INTO hotels (name, location, rating) VALUES
-            ('Grand Hotel', 'вул. Шевченка 10, Київ', 4.5),
-            ('City Hotel', 'вул. Хрещатик 22, Київ', 4.2),
-            ('Seaside Resort', 'вул. Морська 5, Одеса', 4.8),
-            ('Mountain View', 'вул. Гірська 15, Львів', 4.3),
-            ('Business Hotel', 'вул. Ділова 7, Харків', 4.0);
+        -- Додавання готелів
+        INSERT INTO hotels (name, location, rating) VALUES
+        ('Grand Hotel', 'вул. Шевченка 10, Київ', 4.5),
+        ('City Hotel', 'вул. Хрещатик 22, Київ', 4.2),
+        ('Seaside Resort', 'вул. Морська 5, Одеса', 4.8),
+        ('Mountain View', 'вул. Гірська 15, Львів', 4.3),
+        ('Business Hotel', 'вул. Ділова 7, Харків', 4.0);
+END IF;
+END $$;
 
-            -- Додавання кімнат для кожного готелю
-    INSERT INTO rooms (number, hotel_id, type, price_per_night)
-    VALUES
+-- Перевіряємо чи є дані в таблиці rooms
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM rooms LIMIT 1) THEN
+        -- Додавання кімнат для кожного готелю
+        INSERT INTO rooms (number, hotel_id, type, price_per_night) VALUES
         -- Кімнати для Grand Hotel
         ('101', 1, 'STANDARD', 1000),
         ('102', 1, 'STANDARD', 1000),
@@ -42,5 +48,5 @@ BEGIN
         ('102', 5, 'STANDARD', 700),
         ('201', 5, 'DELUXE', 1300),
         ('202', 5, 'DELUXE', 1300);
-    END IF;
+END IF;
 END $$;
